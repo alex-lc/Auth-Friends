@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
-function Login() {
+function Login(props) {
+
+    let history = useHistory();
 
     const [user, setUser] = useState({
         username: '',
@@ -14,13 +18,22 @@ function Login() {
         });
     }
 
-    const handleSubmit = e => {
+    const login = e => {
         e.preventDefault();
-        console.log(user);
+        // console.log(user);
+        axios.post(`http://localhost:5000/api/login`, user)
+            .then((res) => {
+                localStorage.setItem('token', res.data.payload);
+                history.push("/friendslist");
+                console.log(res);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={login}>
             <div>
                 <label htmlFor="username">Username: </label>
                 <input
