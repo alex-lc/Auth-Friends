@@ -10,7 +10,8 @@ function App() {
   return (
     <div>
       <h1>Auth Friends</h1>
-      <Link to='/login'>Click here to login</Link>
+      <p><Link to='friendslist'>See Friends List</Link></p>
+      <p><Link to='/login'>Click here to login</Link></p>
       <Route exact path="/">
         <h2>Please Login!</h2>
       </Route>
